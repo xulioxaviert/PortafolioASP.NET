@@ -10,27 +10,35 @@ namespace Portafolio.Controllers
 
         private readonly ILogger<HomeController> _logger;
         private readonly IProjectsRepository projectsRepository;
+        private readonly IConfiguration configuration;
 
-        public HomeController(ILogger<HomeController> logger, IProjectsRepository projectsRepository)
+        public HomeController(IProjectsRepository projectsRepository)
+
         {
-            _logger = logger;
+
             this.projectsRepository = projectsRepository;
+
         }
 
         public IActionResult Index()
 
         {
-                        
-            var projects = projectsRepository.GetProjects().Take(3).ToList();
 
-            var modelo = new HomeIndexViewModel() { Projects = projects };
+            var projects = projectsRepository.GetProjects().Take(3).ToList();
+            var modelo = new HomeIndexViewModel()
+            {
+                Projects = projects
+            };
+
+
             return View(modelo);
         }
 
 
-        public IActionResult Privacy()
+        public IActionResult Projects()
         {
-            return View();
+            var projects = projectsRepository.GetProjects();
+            return View(projects);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

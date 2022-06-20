@@ -6,6 +6,11 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddTransient<IProjectsRepository, ProjectsRepository>();
 
+
+
+
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
